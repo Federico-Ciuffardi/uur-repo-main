@@ -5,6 +5,12 @@ set -o nounset      # Disallow expansion of unset variables
 set -o pipefail     # Use last non-zero exit code in a pipeline
 set -o errtrace     # Ensure the error trap handler is inherited
 
+distro_name=$(lsb_release -i | sed 's/.*:\s*//g')
+if [ "$distro_name" != "Ubuntu" ] ; then
+  echo "Package only for Ubuntu"
+  exit 1
+fi
+
 git clone https://github.com/ra-c/libxft-bgra-debian || true
 cd libxft-bgra-debian
 git pull
