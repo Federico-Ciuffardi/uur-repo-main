@@ -1,5 +1,6 @@
 base-devel
 libx11
 libxft
+libxinerama
 xorg
 xorg-xinit
