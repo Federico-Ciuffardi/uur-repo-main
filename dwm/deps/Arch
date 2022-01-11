@@ -1,3 +1,4 @@
 base-devel
+libx11
 xorg
 xorg-xinit
