@@ -1,0 +1,5 @@
+autotools-dev
+automake
+libevent-dev
+libncurses5-dev
+bison

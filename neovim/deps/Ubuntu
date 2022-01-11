@@ -1,0 +1,11 @@
+ninja-build
+gettext
+libtool
+libtool-bin
+autoconf
+automake
+cmake
+g++
+unzip
+pkg-config
+curl

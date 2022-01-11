@@ -1,0 +1,14 @@
+meson
+cmake
+libev-dev
+libxcb-render-util0-dev
+libxcb-image0-dev
+libxcb-damage0-dev
+libxcb-randr0-dev
+libxcb-sync-dev
+libxcb-composite0-dev
+libxcb-xinerama0-dev
+libxcb-present-dev
+libxcb-glx0-dev
+uthash-dev
+libconfig-dev
