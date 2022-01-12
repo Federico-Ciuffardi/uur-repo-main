@@ -6,7 +6,7 @@ set -o pipefail     # Use last non-zero exit code in a pipeline
 set -o errtrace     # Ensure the error trap handler is inherited
 
 # get source 
-git clone git@github.com:Federico-Ciuffardi/nay.git --recurse-submodules || true
+git clone https://github.com/Federico-Ciuffardi/nay.git --recurse-submodules || true
 cd nay 
 
 # update source
