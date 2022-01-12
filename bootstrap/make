@@ -8,10 +8,6 @@ set -o errexit      # Exit on most errors (see the manual)
 set -o nounset      # Disallow expansion of unset variables
 set -o errtrace     # Ensure the error trap handler is inherited
 
-uur install main/yay
-
-uur install main/nay
-
 distro_name=$(lsb_release -i | sed 's/.*:\s*//g')
 case "$distro_name" in
   Arch)
