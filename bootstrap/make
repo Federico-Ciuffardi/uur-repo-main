@@ -1,32 +1,3 @@
-#!/usr/bin/env bash
-
-if [[ ${DEBUG-} =~ ^1|yes|true$ ]]; then
-    set -o xtrace       # Trace the execution of the script (debug)
-fi
-
-set -o errexit      # Exit on most errors (see the manual)
-set -o nounset      # Disallow expansion of unset variables
-set -o errtrace     # Ensure the error trap handler is inherited
-
-# while ! [ -d "$HOME/.ssh" ] ; do
-#   echo "No SSH key created, let's create one..."
-#   printf "Mail: "
-#   read mail
-#   ssh-keygen -t ed25519 -C "$mail"
-#   eval "$(ssh-agent -s)"
-#   ssh-add ~/.ssh/id_ed25519
-# done
-
-while ! ssh -T git@github.com 2>&1 | grep "successfully" > /dev/null ; do 
-  echo
-  echo "Log into your accont with SSH:"
-  echo
-  gh auth login
-  # printf "SSH key title: "
-  # read ssh_key_title
-  # gh ssh-key add ~/.ssh/id_ed25519 -t "$ssh_key_title"
-done
-
 uur install main/yay
 
 uur install main/nay
