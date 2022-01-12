@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+set -o errexit      # Exit on most errors (see the manual)
+set -o nounset      # Disallow expansion of unset variables
+set -o pipefail     # Use last non-zero exit code in a pipeline
+set -o errtrace     # Ensure the error trap handler is inherited
+
+while ! [ -d "$HOME/.ssh" ] || ! ssh -T git@github.com 2>&1 | grep "successfully" > /dev/null ; do 
+  echo "Github SSH key not set"
+
+  printf "Mail: "
+  read mail
+  
+  ssh-keygen -t ed25519 -C "$mail"
+  eval "$(ssh-agent -s)"
+  ssh-add ~/.ssh/id_ed25519
+
+  gh auth login
+
+  printf "SSH key title: "
+  read ssh_key_title
+  gh ssh-key add ~/.ssh/id_ed25519 -t "$ssh_key_title"
+done
+
+uur install main/yay
+
+uur install main/nay
+
+distro_name=$(lsb_release -i | sed 's/.*:\s*//g')
+case "$distro_name" in
+  Arch)
+    nay init git@github.com:Federico-Ciuffardi/nay-dotfiles.git
+    nay init git@github.com:Federico-Ciuffardi/nay-arch.git
+    nay pull_force
+    ;;
+  Ubuntu)
+    nay init git@github.com:Federico-Ciuffardi/nay-dotfiles-ubuntu.git
+    nay init git@github.com:Federico-Ciuffardi/nay-ubuntu.git
+    ;;
+  *)
+    echo "Unsuported distro \"$distro_name\""
+    ;;
+esac
+
