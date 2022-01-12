@@ -26,3 +26,16 @@ while ! ssh -T git@github.com 2>&1 | grep "successfully" > /dev/null ; do
   # read ssh_key_title
   # gh ssh-key add ~/.ssh/id_ed25519 -t "$ssh_key_title"
 done
+
+if ! [ -d $HOME/.gnupg ] ; then
+  gpg --full-generate-key
+fi
+
+if ! [ -d $HOME/.password-store ] ; then
+  read mail
+  pass init $mail 
+fi
+
+if ! [ -f $HOME/.password-store/nay.gpg ] ; then
+  nay setpass
+fi
