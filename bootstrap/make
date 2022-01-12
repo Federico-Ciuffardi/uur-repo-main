@@ -5,14 +5,14 @@ set -o nounset      # Disallow expansion of unset variables
 set -o pipefail     # Use last non-zero exit code in a pipeline
 set -o errtrace     # Ensure the error trap handler is inherited
 
-while ! [ -d "$HOME/.ssh" ] ; do
-  echo "No SSH key created, let's create one..."
-  printf "Mail: "
-  read mail
-  ssh-keygen -t ed25519 -C "$mail"
-  eval "$(ssh-agent -s)"
-  ssh-add ~/.ssh/id_ed25519
-done
+# while ! [ -d "$HOME/.ssh" ] ; do
+#   echo "No SSH key created, let's create one..."
+#   printf "Mail: "
+#   read mail
+#   ssh-keygen -t ed25519 -C "$mail"
+#   eval "$(ssh-agent -s)"
+#   ssh-add ~/.ssh/id_ed25519
+# done
 
 while ! ssh -T git@github.com 2>&1 | grep "successfully" > /dev/null ; do 
   echo "SSH key not on Github, let's set it..."
