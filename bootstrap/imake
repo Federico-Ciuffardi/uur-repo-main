@@ -37,6 +37,6 @@ if ! [ -d $HOME/.password-store ] ; then
   pass init $mail 
 fi
 
-if ! [ -f $HOME/.password-store/nay.gpg ] ; then
+while ! [ -f $HOME/.password-store/nay.gpg ] ; do 
   nay setpass
-fi
+done
