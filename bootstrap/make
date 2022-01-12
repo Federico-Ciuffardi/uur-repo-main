@@ -15,11 +15,13 @@ set -o errtrace     # Ensure the error trap handler is inherited
 # done
 
 while ! ssh -T git@github.com 2>&1 | grep "successfully" > /dev/null ; do 
-  echo "SSH key not on Github, let's set it..."
+  echo
+  echo "Log into your accont with SSH:"
+  echo
   gh auth login
-  printf "SSH key title: "
-  read ssh_key_title
-  gh ssh-key add ~/.ssh/id_ed25519 -t "$ssh_key_title"
+  # printf "SSH key title: "
+  # read ssh_key_title
+  # gh ssh-key add ~/.ssh/id_ed25519 -t "$ssh_key_title"
 done
 
 uur install main/yay
