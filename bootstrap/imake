@@ -40,3 +40,22 @@ fi
 while ! [ -f $HOME/.password-store/nay.gpg ] ; do 
   nay setpass
 done
+
+
+distro_name=$(lsb_release -i | sed 's/.*:\s*//g')
+case "$distro_name" in
+  Arch)
+    nay init git@github.com:Federico-Ciuffardi/nay-arch.git
+    nay pull_force --yes nay-arch
+    nay init git@github.com:Federico-Ciuffardi/nay-dotfiles.git
+    nay pull_force --yes nay-dotfiles
+    ;;
+  Ubuntu)
+    nay init git@github.com:Federico-Ciuffardi/nay-dotfiles-ubuntu.git
+    nay init git@github.com:Federico-Ciuffardi/nay-ubuntu.git
+    ;;
+  *)
+    echo "Unsuported distro \"$distro_name\""
+    ;;
+esac
+
