@@ -12,6 +12,6 @@ if [ "$distro_name" != "Arch" ] ; then
 fi
 
 cd /tmp
-git clone https://aur.archlinux.org/yay.git
+git clone https://aur.archlinux.org/yay.git || true
 cd yay
 makepkg -si --noconfirm 
