@@ -32,7 +32,7 @@ if ! [ -d $HOME/.gnupg ] ; then
 fi
 
 if ! [ -d $HOME/.password-store ] ; then
-  echo hola
+  printf "Mail for password store: " 
   read mail
   pass init $mail 
 fi
