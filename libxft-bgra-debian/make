@@ -11,9 +11,7 @@ if [ "$distro_name" != "Ubuntu" ] ; then
   exit 1
 fi
 
-git clone https://github.com/ra-c/libxft-bgra-debian || true
-cd libxft-bgra-debian
-git pull
+cd git_src
 cd compiled
 sudo dpkg -i *.deb
 sudo apt --fix-broken install -y
