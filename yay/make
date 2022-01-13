@@ -1,17 +1,10 @@
 #!/usr/bin/env bash
 
-set -o errexit      # Exit on most errors (see the manual)
-set -o nounset      # Disallow expansion of unset variables
-set -o pipefail     # Use last non-zero exit code in a pipeline
-set -o errtrace     # Ensure the error trap handler is inherited
-
 distro_name=$(lsb_release -i | sed 's/.*:\s*//g')
 if [ "$distro_name" != "Arch" ] ; then
   echo "Package only for Arch"
   exit 1
 fi
 
-cd /tmp
-git clone https://aur.archlinux.org/yay.git || true
-cd yay
+cd git_src 
 makepkg -si --noconfirm 

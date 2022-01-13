@@ -18,11 +18,7 @@ sudo apt-get install -y nodejs
 npm list -g nativefier || sudo npm install -g nativefier
 npm update nativefier
 
-git clone https://aur.archlinux.org/whatsapp-nativefier.git || true
-
-cd whatsapp-nativefier
-
-git pull
+cd git_src
 
 pkgname=whatsapp-nativefier
 url="https://web.${pkgname%-nativefier}.com"

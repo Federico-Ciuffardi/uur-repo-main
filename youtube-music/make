@@ -14,8 +14,7 @@ if [ "$distro_name" != "Ubuntu" ] ; then
 fi
 
 sudo npm install --global yarn
-git clone https://aur.archlinux.org/youtube-music-bin.git youtube-music || true
-cd youtube-music
+cd git_src
 git pull
 source PKGBUILD
 cd ..
