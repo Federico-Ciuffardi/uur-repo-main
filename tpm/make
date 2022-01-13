@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 mkdir -p ~/.tmux/plugins
-rsync -au git_src/ ~/.tmux/plugins/tpm
+cp -r  git_src/ ~/.tmux/plugins/tpm
