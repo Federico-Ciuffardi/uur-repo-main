@@ -41,7 +41,7 @@ while ! [ -f $HOME/.password-store/nay.gpg ] ; do
   nay setpass
 done
 
-export GPG_TTY=$(tty)
+export GPG_TTY=$(tty)
 
 distro_name=$(lsb_release -i | sed 's/.*:\s*//g')
 case "$distro_name" in
