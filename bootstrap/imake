@@ -61,9 +61,9 @@ case "$distro_name" in
 esac
 
 # Enable services
-sudo systemctl enable NetworkManager.service 
-sudo systemctl enable acpid.service
-sudo systemctl enable ntpd.service
+sudo systemctl --now enable NetworkManager.service 
+sudo systemctl --now enable acpid.service
+sudo systemctl --now enable ntpd.service
 
 # change shell
 sudo usermod --shell /bin/zsh fede 
