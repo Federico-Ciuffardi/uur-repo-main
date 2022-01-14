@@ -59,3 +59,13 @@ case "$distro_name" in
     ;;
 esac
 
+# Enable services
+sudo systemctl enable NetworkManager.service 
+sudo systemctl enable acpid.service
+sudo systemctl enable ntpd.service
+
+# change shell
+chsh -s /usr/bin/zsh
+
+echo "Success!"
+
