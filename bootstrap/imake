@@ -66,7 +66,7 @@ sudo systemctl enable acpid.service
 sudo systemctl enable ntpd.service
 
 # change shell
-sudo usermod --shell /usr/zsh fede 
+sudo usermod --shell /bin/zsh fede 
 
 echo "Success!"
 
