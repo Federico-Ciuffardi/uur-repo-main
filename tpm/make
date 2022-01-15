@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 
 mkdir -p ~/.tmux/plugins
-cp -r  git_src/ ~/.tmux/plugins/tpm
+
+rm -rf ~/.tmux/plugins/tpm
+cp -r git_src ~/.tmux/plugins/tpm
