@@ -46,8 +46,6 @@ export GPG_TTY=$(tty)
 distro_name=$(lsb_release -i | sed 's/.*:\s*//g')
 case "$distro_name" in
   Arch)
-    timedatectl set-ntp true
-    yay -Syu
     nay init git@github.com:Federico-Ciuffardi/nay-arch.git
     nay pull_force --yes nay-arch
     nay init git@github.com:Federico-Ciuffardi/nay-dotfiles.git
