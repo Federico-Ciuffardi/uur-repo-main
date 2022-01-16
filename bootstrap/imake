@@ -68,5 +68,17 @@ sudo systemctl --now enable ntpd.service
 # change shell
 sudo usermod --shell /bin/zsh fede 
 
+function addmail(){
+  printf "Password for $1 :\n"
+  pass insert $1
+  mkdir -p $HOME/.local/share/mail/$1
+  mw -y $1
+}
+addmail federico.ciuffardi@outlook.com
+
+addmail fciuffardi@fing.edu.uy
+
+mw -T
+
 echo "Success!"
 
