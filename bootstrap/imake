@@ -70,7 +70,9 @@ sudo usermod --shell /bin/zsh fede
 
 function addmail(){
   printf "Password for $1 :\n"
-  pass insert $1
+  while ! [ -f $HOME/.password-store/$1.gpg ] ; do 
+    pass insert $1
+  done
   mkdir -p $HOME/.local/share/mail/$1
   mw -y $1
 }
