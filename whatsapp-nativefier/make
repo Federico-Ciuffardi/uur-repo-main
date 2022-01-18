@@ -1,23 +1,5 @@
 #!/usr/bin/env bash
 
-set -o errexit      # Exit on most errors (see the manual)
-set -o nounset      # Disallow expansion of unset variables
-set -o pipefail     # Use last non-zero exit code in a pipeline
-set -o errtrace     # Ensure the error trap handler is inherited
-
-distro_name=$(lsb_release -i | sed 's/.*:\s*//g')
-if [ "$distro_name" != "Ubuntu" ] ; then
-  echo "Package only for Ubuntu"
-  exit 1
-fi
-
-curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-sudo apt-get install -y nodejs
-
-# install nativifier
-npm list -g nativefier || sudo npm install -g nativefier
-npm update nativefier
-
 cd git_src
 
 pkgname=whatsapp-nativefier

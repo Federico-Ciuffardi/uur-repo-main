@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+
+set -o errexit      # Exit on most errors (see the manual)
+set -o nounset      # Disallow expansion of unset variables
+set -o pipefail     # Use last non-zero exit code in a pipeline
+set -o errtrace     # Ensure the error trap handler is inherited
+
+distro_name=$(lsb_release -i | sed 's/.*:\s*//g')
+if [ "$distro_name" != "Ubuntu" ] ; then
+  echo "Package only for Ubuntu"
+  exit 1
+fi
+
+curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+# install nativifier
+npm list -g nativefier || sudo npm install -g nativefier
+npm update nativefier
+
+cd git_src
+
+pkgname=whatsapp-nativefier
+url="https://web.${pkgname%-nativefier}.com"
+nativefier \
+  --name "WhatsApp" \
+  --icon "${pkgname}.png" \
+  --width "800px" \
+  --height "600px" \
+  --user-agent "safari" \
+  --inject "${pkgname}-inject.js" \
+  --browserwindow-options '{ "webPreferences": { "spellcheck": true } }' \
+  --verbose \
+  --single-instance \
+  "${url}"
+  # --tray \
+
+sudo ln -sf $(pwd)/WhatsApp-linux-x64/WhatsApp /bin/whatsapp-nativefier
