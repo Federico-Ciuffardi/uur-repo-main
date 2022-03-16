@@ -64,6 +64,7 @@ esac
 sudo systemctl --now enable NetworkManager.service 
 sudo systemctl --now enable acpid.service
 sudo systemctl --now enable ntpd.service
+sudo systemctl --now enable mpd.service
 
 # change shell
 sudo usermod --shell /bin/zsh fede 
