@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
 
-rm -rf ~/bin
-cp -r git_src ~/bin
+INSTALL_PATH="$HOME/.local/share/mybin"
+
+rm -rf $INSTALL_PATH
+mkdir -p $(dirname $INSTALL_PATH)
+cp -r git_src $INSTALL_PATH
+
+cd $INSTALL_PATH
+sudo bash ./make.sh install 
