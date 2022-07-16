@@ -1,5 +1,31 @@
 #!/usr/bin/env bash
 
+function generic_desktop_setup(){
+  # Enable services
+  sudo systemctl --now enable NetworkManager.service 
+  sudo systemctl --now enable acpid.service
+  sudo systemctl --now enable ntpd.service
+  sudo systemctl --now enable mpd.service
+
+  # change shell
+  sudo usermod --shell /bin/zsh fede 
+
+  function addmail(){
+    printf "Password for $1 :\n"
+    while ! [ -f $HOME/.password-store/$1.gpg ] ; do 
+      pass insert $1
+    done
+    mkdir -p $HOME/.local/share/mail/$1
+    mw -y $1
+  }
+  addmail federico.ciuffardi@outlook.com
+
+  addmail fciuffardi@fing.edu.uy
+
+  mw -T
+}
+
+
 if [[ ${DEBUG-} =~ ^1|yes|true$ ]]; then
     set -o xtrace       # Trace the execution of the script (debug)
 fi
@@ -43,45 +69,35 @@ done
 
 export GPG_TTY=$(tty)
 
-distro_name=$(lsb_release -i | sed 's/.*:\s*//g')
+if command -v lsb_release &> /dev/null ; then
+  distro_name=$(lsb_release -i | sed 's/.*:\s*//g')
+else
+  printf "Assuming we're in termux...\n" 
+  distro_name="Termux"
+fi
+
 case "$distro_name" in
   Arch)
     nay init git@github.com:Federico-Ciuffardi/nay-arch.git
     nay pull_force --yes nay-arch
     nay init git@github.com:Federico-Ciuffardi/nay-dotfiles.git
     nay pull_force --yes nay-dotfiles
+    generic_desktop_setup
     ;;
   Ubuntu)
-    nay init git@github.com:Federico-Ciuffardi/nay-dotfiles-ubuntu.git
     nay init git@github.com:Federico-Ciuffardi/nay-ubuntu.git
+    nay pull_force --yes nay-ubuntu
+    nay init git@github.com:Federico-Ciuffardi/nay-dotfiles-ubuntu.git
+    nay pull_force --yes nay-dotfiles-ubuntu
     ;;
-  *)
-    echo "Unsuported distro \"$distro_name\""
+    generic_desktop_setup
+  Termux)
+    termux-setup-storage
+    nay init git@github.com:Federico-Ciuffardi/nay-termux.git
+    nay pull_force --yes nay-termux
+    nay init git@github.com:Federico-Ciuffardi/nay-dotfiles.git
+    nay pull_force --yes nay-dotfiles
     ;;
 esac
 
-# Enable services
-sudo systemctl --now enable NetworkManager.service 
-sudo systemctl --now enable acpid.service
-sudo systemctl --now enable ntpd.service
-sudo systemctl --now enable mpd.service
-
-# change shell
-sudo usermod --shell /bin/zsh fede 
-
-function addmail(){
-  printf "Password for $1 :\n"
-  while ! [ -f $HOME/.password-store/$1.gpg ] ; do 
-    pass insert $1
-  done
-  mkdir -p $HOME/.local/share/mail/$1
-  mw -y $1
-}
-addmail federico.ciuffardi@outlook.com
-
-addmail fciuffardi@fing.edu.uy
-
-mw -T
-
 echo "Success!"
-
