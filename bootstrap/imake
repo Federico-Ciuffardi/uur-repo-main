@@ -89,8 +89,8 @@ case "$distro_name" in
     nay pull_force --yes nay-ubuntu
     nay init git@github.com:Federico-Ciuffardi/nay-dotfiles-ubuntu.git
     nay pull_force --yes nay-dotfiles-ubuntu
-    ;;
     generic_desktop_setup
+    ;;
   Termux)
     termux-setup-storage
     nay init git@github.com:Federico-Ciuffardi/nay-termux.git
