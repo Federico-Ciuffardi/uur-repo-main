@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+cd git_src
+cargo build --release
+sudo ln -sf $(pwd)/target/release/taskwarrior-tui /bin/twt
