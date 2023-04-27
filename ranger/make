@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+cd git_src
+sudo make install

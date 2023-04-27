@@ -12,3 +12,5 @@ libxcb-present-dev
 libxcb-glx0-dev
 uthash-dev
 libconfig-dev
+libpixman-1-dev
+libdbus-1-dev

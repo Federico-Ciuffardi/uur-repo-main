@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+cd git_src
+./configure \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --libexecdir=/lib \
+    --gpgme \
+    --sqlite \
+    --autocrypt \
+    --lua \
+    --notmuch \
+    --gss \
+    --gnutls \
+    --sasl \
+    --with-ui=ncurses \
+    --with-idn2=/usr \
+    --disable-idn \
+    --idn2 \
+    --bdb \
+    --lmdb \
+    --kyotocabinet \
+    --gdbm \
+    --lz4 \
+    --zlib \
+    --zstd
+sudo make install

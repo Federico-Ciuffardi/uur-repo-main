@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+cd git_src
+
+pkgname=whatsapp-nativefier
+url="https://web.${pkgname%-nativefier}.com"
+nativefier \
+  --name "WhatsApp" \
+  --icon "${pkgname}.png" \
+  --width "800px" \
+  --height "600px" \
+  --user-agent "safari" \
+  --inject "${pkgname}-inject.js" \
+  --browserwindow-options '{ "webPreferences": { "spellcheck": true } }' \
+  --verbose \
+  --single-instance \
+  "${url}"
+  # --tray \
+
+sudo ln -sf $(pwd)/WhatsApp-linux-x64/WhatsApp /bin/whatsapp-nativefier

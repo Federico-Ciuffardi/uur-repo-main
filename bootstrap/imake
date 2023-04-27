@@ -1,28 +1,28 @@
 #!/usr/bin/env bash
 
 function generic_desktop_setup(){
-  # Enable services
-  sudo systemctl --now enable NetworkManager.service 
-  sudo systemctl --now enable acpid.service
-  sudo systemctl --now enable ntpd.service
-  sudo systemctl --now enable mpd.service
+ # Enable services
+ sudo systemctl --now enable NetworkManager.service 
+ sudo systemctl --now enable acpid.service
+ sudo systemctl --now enable ntpd.service
+ sudo systemctl --now enable mpd.service
 
-  # change shell
-  sudo usermod --shell /bin/zsh fede 
+ # change shell
+ sudo usermod --shell /bin/zsh fciuffardi 
 
-  function addmail(){
-    printf "Password for $1 :\n"
-    while ! [ -f $HOME/.password-store/$1.gpg ] ; do 
-      pass insert $1
-    done
-    mkdir -p $HOME/.local/share/mail/$1
-    mw -y $1
-  }
-  addmail federico.ciuffardi@outlook.com
+function addmail(){
+   printf "Password for $1 :\n"
+   while ! [ -f $HOME/.password-store/$1.gpg ] ; do 
+     pass insert $1
+   done
+   mkdir -p $HOME/.local/share/mail/$1
+   mw -y $1
+ }
+ addmail federico.ciuffardi@outlook.com
 
-  addmail fciuffardi@fing.edu.uy
+ addmail fciuffardi@fing.edu.uy
 
-  mw -T
+ mw -T
 }
 
 
@@ -34,14 +34,14 @@ set -o errexit      # Exit on most errors (see the manual)
 set -o nounset      # Disallow expansion of unset variables
 set -o errtrace     # Ensure the error trap handler is inherited
 
-# while ! [ -d "$HOME/.ssh" ] ; do
-#   echo "No SSH key created, let's create one..."
-#   printf "Mail: "
-#   read mail
-#   ssh-keygen -t ed25519 -C "$mail"
-#   eval "$(ssh-agent -s)"
-#   ssh-add ~/.ssh/id_ed25519
-# done
+while ! [ -d "$HOME/.ssh" ] ; do
+  echo "No SSH key created, let's create one..."
+  printf "Mail: "
+  read mail
+  ssh-keygen -t ed25519 -C "$mail"
+  eval "$(ssh-agent -s)"
+  ssh-add ~/.ssh/id_ed25519
+done
 
 while ! ssh -T git@github.com 2>&1 | grep "successfully" > /dev/null ; do 
   echo

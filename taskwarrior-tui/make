@@ -2,4 +2,4 @@
 
 cd git_src
 cargo build --release
-sudo ln -sf $(pwd)/target/release/taskwarrior-tui /bin/twt
+sudo ln -sf $(pwd)/target/release/taskwarrior-tui /bin/taskwarrior-tui

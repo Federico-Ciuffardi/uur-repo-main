@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+git clone --recursive https://github.com/DaveDavenport/rofi
+cd rofi/
+meson setup build
+sudo ninja -C build install
+

@@ -1,0 +1,12 @@
+libgpgme-dev
+libsasl2-dev
+liblua5.3-dev
+libnotmuch-dev
+libsqlite3-dev
+libgnutls28-dev
+libgdbm-dev
+liblmdb-dev
+libdb-dev
+libkyotocabinet-dev
+liblz4-dev
+libkrb5-dev
