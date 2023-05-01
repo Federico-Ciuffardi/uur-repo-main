@@ -14,3 +14,4 @@ uthash-dev
 libconfig-dev
 libpixman-1-dev
 libdbus-1-dev
+libxcb-dpms0-dev
