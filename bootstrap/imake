@@ -4,11 +4,10 @@ function generic_desktop_setup(){
  # Enable services
  sudo systemctl --now enable NetworkManager.service 
  sudo systemctl --now enable acpid.service
- sudo systemctl --now enable ntpd.service
  sudo systemctl --now enable mpd.service
 
  # change shell
- sudo usermod --shell /bin/zsh fciuffardi 
+ sudo usermod --shell /bin/zsh fede 
 
 function addmail(){
    printf "Password for $1 :\n"
@@ -19,8 +18,6 @@ function addmail(){
    mw -y $1
  }
  addmail federico.ciuffardi@outlook.com
-
- addmail fciuffardi@fing.edu.uy
 
  mw -T
 }
@@ -78,6 +75,7 @@ case "$distro_name" in
     nay init git@github.com:Federico-Ciuffardi/nay-dotfiles.git
     nay pull_force --yes nay-dotfiles
     generic_desktop_setup
+    sudo systemctl --now enable ntpd.service
     ;;
   Ubuntu)
     nay init git@github.com:Federico-Ciuffardi/nay-ubuntu.git

@@ -6,3 +6,4 @@ libxcb-icccm4-dev
 libstartup-notification0-dev
 flex
 libxcb-cursor-dev
+bison
