@@ -1,25 +1,21 @@
 #!/usr/bin/env bash
 
 function generic_desktop_setup(){
- # Enable services
- sudo systemctl --now enable NetworkManager.service 
- sudo systemctl --now enable acpid.service
- sudo systemctl --now enable mpd.service
+function addmail(){
+   printf "Password for $1 :\n"
+   while ! [ -f $HOME/.password-store/$1.gpg ] ; do 
+     pass insert $1 || true
+   done
+   mkdir -p $HOME/.local/share/mail/$1
+   mymailsync
+ }
+ addmail federico.ciuffardi@outlook.com
 
  # change shell
  sudo usermod --shell /bin/zsh fede 
 
-function addmail(){
-   printf "Password for $1 :\n"
-   while ! [ -f $HOME/.password-store/$1.gpg ] ; do 
-     pass insert $1
-   done
-   mkdir -p $HOME/.local/share/mail/$1
-   mw -y $1
- }
- addmail federico.ciuffardi@outlook.com
-
- mw -T
+ # Enable services
+ sudo systemctl --now enable acpid.service
 }
 
 
@@ -31,23 +27,11 @@ set -o errexit      # Exit on most errors (see the manual)
 set -o nounset      # Disallow expansion of unset variables
 set -o errtrace     # Ensure the error trap handler is inherited
 
-while ! [ -d "$HOME/.ssh" ] ; do
-  echo "No SSH key created, let's create one..."
-  printf "Mail: "
-  read mail
-  ssh-keygen -t ed25519 -C "$mail"
-  eval "$(ssh-agent -s)"
-  ssh-add ~/.ssh/id_ed25519
-done
-
 while ! ssh -T git@github.com 2>&1 | grep "successfully" > /dev/null ; do 
   echo
-  echo "Log into your accont with SSH:"
+  echo "Setup github access"
   echo
   gh auth login
-  # printf "SSH key title: "
-  # read ssh_key_title
-  # gh ssh-key add ~/.ssh/id_ed25519 -t "$ssh_key_title"
 done
 
 if ! [ -d $HOME/.gnupg ] ; then
@@ -75,7 +59,8 @@ case "$distro_name" in
     nay init git@github.com:Federico-Ciuffardi/nay-dotfiles.git
     nay pull_force --yes nay-dotfiles
     generic_desktop_setup
-    sudo systemctl --now enable ntpd.service
+    yay --completioninterval 0 --save # fixes broken autocomplete
+    sudo chmod -R --reference=/opt whatsapp-nativefier # probably needed for whatsapp-nativefier to work
     ;;
   Ubuntu)
     nay init git@github.com:Federico-Ciuffardi/nay-ubuntu.git
