@@ -1,23 +1,12 @@
 #!/usr/bin/env bash
 
 function generic_desktop_setup(){
-function addmail(){
-   printf "Password for $1 :\n"
-   while ! [ -f $HOME/.password-store/$1.gpg ] ; do 
-     pass insert $1 || true
-   done
-   mkdir -p $HOME/.local/share/mail/$1
-   mymailsync
- }
- addmail federico.ciuffardi@outlook.com
-
  # change shell
  sudo usermod --shell /bin/zsh fede 
 
  # Enable services
  sudo systemctl --now enable acpid.service
 }
-
 
 if [[ ${DEBUG-} =~ ^1|yes|true$ ]]; then
     set -o xtrace       # Trace the execution of the script (debug)
