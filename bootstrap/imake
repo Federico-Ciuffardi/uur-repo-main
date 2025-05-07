@@ -6,6 +6,7 @@ function generic_desktop_setup(){
 
  # Enable services
  sudo systemctl --now enable acpid.service
+ sudo systemctl --now enable cronie
 }
 
 if [[ ${DEBUG-} =~ ^1|yes|true$ ]]; then
