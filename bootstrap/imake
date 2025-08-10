@@ -64,5 +64,6 @@ case "$distro_name" in
     chsh -s /bin/zsh
     ;;
 esac
+pkill -KILL -u $USER
 
 echo "Success!"
