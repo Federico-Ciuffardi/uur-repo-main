@@ -28,9 +28,7 @@ if ! [ -d $HOME/.gnupg ] ; then
 fi
 
 if ! [ -d $HOME/.password-store ] ; then
-  printf "Mail for password store: " 
-  read mail
-  pass init $mail 
+  pass init $(gpg --list-secret-keys --with-colons --fingerprint | grep ^fpr: | head -n1 | cut -d: -f10)
 fi
 
 while ! [ -f $HOME/.password-store/nay.gpg ] ; do 
