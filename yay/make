@@ -7,4 +7,6 @@ if [ "$distro_name" != "Arch" ] ; then
 fi
 
 cd git_src 
-makepkg -si --noconfirm 
+makepkg --noconfirm
+sudo pacman -U --noconfirm *.pkg.tar.zst
+git clean -fdx # clean packages after install to prevent potential conflicts
