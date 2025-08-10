@@ -67,3 +67,4 @@ case "$distro_name" in
 esac
 
 echo "Success!"
+exit
