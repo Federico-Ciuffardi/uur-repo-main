@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+[ -f /bin/fdfind ] && sudo ln -s /bin/fdfind /bin/fd
