@@ -23,22 +23,20 @@ while ! ssh -T git@github.com 2>&1 | grep "successfully" > /dev/null ; do
   gh auth login
 done
 
-if ! [ -d $HOME/.gnupg ] ; then
-  gpg --full-generate-key
-fi
+# The steps below are not really needed for bootstrap
+# if [ -z $(gpg --list-secret-keys --with-colons --fingerprint | grep ^fpr: | head -n1 | cut -d: -f10) ] ; then
+#  gpg --full-generate-key
+# fi
+# if ! [ -d $HOME/.password-store ] ; then
+#  pass init $(gpg --list-secret-keys --with-colons --fingerprint | grep ^fpr: | head -n1 | cut -d: -f10)
+# fi
+# while ! [ -f $HOME/.password-store/nay.gpg ] ; do 
+#  nay setpass
+# done
 
-if ! [ -d $HOME/.password-store ] ; then
-  pass init $(gpg --list-secret-keys --with-colons --fingerprint | grep ^fpr: | head -n1 | cut -d: -f10)
-fi
-
-while ! [ -f $HOME/.password-store/nay.gpg ] ; do 
-  nay setpass
-done
-
-export GPG_TTY=$(tty)
+# export GPG_TTY=$(tty)
 
 distro_name=$(lsb_release -i | sed 's/.*:\s*//g')
-
 case "$distro_name" in
   Arch)
     nay init git@github.com:Federico-Ciuffardi/nay-arch.git
@@ -49,11 +47,12 @@ case "$distro_name" in
     yay --completioninterval 0 --save # fixes broken autocomplete
     ;;
   Ubuntu)
-    nay init git@github.com:Federico-Ciuffardi/nay-ubuntu.git
-    nay pull_force --yes nay-ubuntu
+    nay init git@github.com:Federico-Ciuffardi/nay-arch.git
+    nay pull_force --yes nay-arch
     nay init git@github.com:Federico-Ciuffardi/nay-dotfiles.git
     nay pull_force --yes nay-dotfiles
     generic_desktop_setup
+    sudo apt remove wl-clipboard -y # otherwise ranger will try to use that for clipbard stuff
     ;;
   Termux)
     termux-setup-storage
@@ -64,6 +63,6 @@ case "$distro_name" in
     chsh -s /bin/zsh
     ;;
 esac
-pkill -KILL -u $USER
 
 echo "Success!"
+echo "Run 'pkill -KILL -u $USER' to log out"
