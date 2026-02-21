@@ -6,4 +6,4 @@ cd git_src
 make
 
 # install
-sudo ln -sf $(pwd)/dragon /bin/dragon-drag-and-drop
+sudo ln -sf $(pwd)/dragon /bin/dragon-drop
